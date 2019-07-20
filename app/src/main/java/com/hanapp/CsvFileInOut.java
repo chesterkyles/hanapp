@@ -231,7 +231,7 @@ public class CsvFileInOut {
 
             for (int ind=0; ind<index; ind++){
                 if(product_name.get(ind).equals(search_this)) {
-                    printToSearchFile = barcode.get(ind) + "," + product_name.get(ind) + "," + company.get(ind) + "," + place_name.get(ind) + "," + price.get(ind) + "," + path.get(ind) + "," + location_latitude.get(ind) + "," + location_longitude.get(ind) + ",";
+                    printToSearchFile = location_latitude.get(ind) + "," + location_longitude.get(ind) + "," + product_name.get(ind) + "," + price.get(ind);
                     bufferedWriter_s.write(printToSearchFile);
                 }
             }
