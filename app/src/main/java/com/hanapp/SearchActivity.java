@@ -1,13 +1,20 @@
 package com.hanapp;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.GridView;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
+
+    Dialog promptDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +32,7 @@ public class SearchActivity extends AppCompatActivity {
         array = new ArrayList<Item>();
 
         String path = "/sdcard/CSV_Files/";
-        String fileName = "items_new.csv";
+        String fileName = "search_results.csv";
         String item_name;
         String item_location;
         String item_price;
@@ -45,6 +52,14 @@ public class SearchActivity extends AppCompatActivity {
 
         return array;
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent input_to_home_intent = new Intent(SearchActivity.this,HomeActivity.class);
+        startActivity(input_to_home_intent);
+        finish();
+    }
+
 }
 
 
