@@ -55,7 +55,7 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="75dp"
+        android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:layout_marginStart="25dp"
         android:layout_marginBottom="8dp"
@@ -81,7 +81,7 @@
 
     <ScrollView
         android:layout_width="0dp"
-        android:layout_height="495dp"
+        android:layout_height="400dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
@@ -100,5 +100,23 @@
             android:text="TextView"
             />
     </ScrollView>
+
+    <ImageButton
+        android:id="@+id/submit_items"
+        android:layout_width="280dp"
+        android:layout_height="52dp"
+        android:layout_gravity="start"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="106dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="28dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.553"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password"
+        app:layout_constraintVertical_bias="0.23" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
