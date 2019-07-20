@@ -133,31 +133,47 @@ public class CsvFileInOut {
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             String csvLine;
 
-            ArrayList<String> latitude = new ArrayList<String>();
-            ArrayList<String> longitude = new ArrayList<String>();
-            ArrayList<String> loc_name = new ArrayList<String>();
+            ArrayList<String> barcode = new ArrayList<String>();
+            ArrayList<String> product_name = new ArrayList<String>();
+            ArrayList<String> company = new ArrayList<String>();
+            ArrayList<String> place_name = new ArrayList<String>();
             ArrayList<String> price = new ArrayList<String>();
+            ArrayList<String> path = new ArrayList<String>();
+            ArrayList<String> location_latitude = new ArrayList<String>();
+            ArrayList<String> location_longitude = new ArrayList<String>();
 
             int index=0;
             while ((csvLine = bufferedReader.readLine()) != null) {
                 String[] row = csvLine.split(",");
-                latitude.add(row[0]);
-                longitude.add(row[1]);
-                loc_name.add(row[2]);
+                barcode.add(row[0]);
+                product_name.add(row[1]);
+                company.add(row[2]);
+                place_name.add(row[3]);
                 price.add(row[3]);
+                path.add(row[3]);
+                location_latitude.add(row[3]);
+                location_longitude.add(row[3]);
                 index += 1;
             }
             ArrayList<String> index_str = new ArrayList<>();
             index_str.add(Integer.toString(index));
             switch(return_type){
-                case "latitude":
-                    return latitude;
-                case "longitude":
-                    return longitude;
-                case "name":
-                    return loc_name;
+                case "barcode":
+                    return barcode;
+                case "product":
+                    return product_name;
+                case "company":
+                    return company;
+                case "place":
+                    return place_name;
                 case "price":
                     return price;
+                case "path":
+                    return path;
+                case "latitude":
+                    return location_latitude;
+                case "longitude":
+                    return location_longitude;
                 case "index":
                     return index_str;
             }
