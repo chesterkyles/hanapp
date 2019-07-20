@@ -19,7 +19,7 @@
         android:roundIcon="@drawable/hanapp_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity 
+        <activity
             android:name=".ProductPageActivity"
             android:windowSoftInputMode="adjustNothing"></activity>
         <activity
