@@ -11,45 +11,6 @@
     android:paddingBottom="@dimen/homepage_bottom_margin"
     tools:context=".HomeActivity">
 
-    <ImageView
-        android:id="@+id/background"
-        android:layout_width="410dp"
-        android:layout_height="143dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/home1" />
-
-    <EditText
-        android:id="@+id/search_edit"
-        android:layout_width="0dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
-        android:background="@android:color/transparent"
-        android:ems="15"
-        android:inputType="textAutoComplete"
-        android:selectAllOnFocus="true"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline1"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline2" />
-
-    <ImageButton
-        android:id="@+id/search_button"
-        android:layout_width="20dp"
-        android:layout_height="41dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
-        android:clickable="true"
-        android:contentDescription="TODO"
-        android:src="@drawable/search"
-        app:layout_constraintBottom_toTopOf="@+id/guideline1"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
@@ -72,8 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="464dp"
-        app:layout_constraintGuide_percent="0.25"/>
+        app:layout_constraintGuide_percent="0.08" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -88,8 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="128dp"
-        app:layout_constraintGuide_percent="0.17" />
+        app:layout_constraintGuide_end="715dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -103,8 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp"
-        app:layout_constraintGuide_percent="0.28" />
+        app:layout_constraintGuide_end="655dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline14"
@@ -123,16 +81,15 @@
         app:layout_constraintGuide_percent="0.03" />
 
 
-
-
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="779dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="dp"
+        android:layout_marginTop="70dp"
         android:fillViewport="true"
         app:layout_constraintEnd_toStartOf="@+id/guideline14"
-        app:layout_constraintHorizontal_bias="0.32"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintVertical_bias="20.0"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/recommended">
 
