@@ -55,7 +55,7 @@ public class SearchActivity extends AppCompatActivity {
         array = new ArrayList<Item>();
 
         String path = "/sdcard/CSV_Files/";
-        String fileName = "search_results.csv";
+        String fileName = "search_result.csv";
         String item_name;
         String item_location;
         String item_price;

@@ -24,7 +24,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     String path = "/sdcard/CSV_Files/";
-    String fileName = "read_locations.csv";
+    String fileName = "search_result.csv";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
