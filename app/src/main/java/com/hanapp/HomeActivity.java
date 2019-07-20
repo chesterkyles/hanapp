@@ -32,6 +32,7 @@ public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
     private ImageButton cam_button;
+    private ImageButton search_button;
 
     //Navigation Pane
     private TextView email_ad_str;
@@ -50,6 +51,7 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.account_info);
 
         cam_button = (ImageButton) findViewById(R.id.camera_button);
+        search_button = (ImageButton) findViewById(R.id.search_button);
 
         cam_button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
@@ -58,6 +60,15 @@ public class HomeActivity extends AppCompatActivity
                 finish();
             }
         });
+
+        search_button.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent maps_intent = new Intent(HomeActivity.this, Maps.class);
+                startActivity(maps_intent);
+                finish();
+            }
+        });
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
