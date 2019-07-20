@@ -63,7 +63,7 @@ public class HomeActivity extends AppCompatActivity
 
         search_button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                Intent maps_intent = new Intent(HomeActivity.this, Maps.class);
+                Intent maps_intent = new Intent(HomeActivity.this, SearchActivity.class);
                 startActivity(maps_intent);
                 finish();
             }
