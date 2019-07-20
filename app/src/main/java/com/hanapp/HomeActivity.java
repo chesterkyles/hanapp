@@ -95,6 +95,12 @@ public class HomeActivity extends AppCompatActivity
                 Intent i = new Intent(getApplicationContext(), ProductPageActivity.class);
                 // Pass image index
                 i.putExtra("id", position);
+
+//                Bundle extras = new Bundle();
+//                extras.putString("EXTRA_USERNAME","my_username");
+//                extras.putString("EXTRA_PASSWORD","my_password");
+//                i.putExtras(extras);
+
                 startActivity(i);
             }
         });
