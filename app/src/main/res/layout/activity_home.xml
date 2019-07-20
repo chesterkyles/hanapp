@@ -4,24 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="#FFFCFC"
     android:paddingLeft="@dimen/page_margin"
     android:paddingTop="@dimen/page_margin"
     android:paddingRight="@dimen/page_margin"
     android:paddingBottom="@dimen/homepage_bottom_margin"
     tools:context=".HomeActivity">
 
-    <Button
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="410dp"
+        android:layout_height="150dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        app:srcCompat="@drawable/home"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="-6dp"
+        tools:layout_editor_absoluteY="-20dp" />
+
+    <ImageButton
         android:id="@+id/camera_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Insert Camera Icon"
+        android:src="@drawable/camera"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="TODO" />
 
     <EditText
         android:id="@+id/search_edit"
@@ -29,28 +43,27 @@
         android:layout_height="32dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="8dp"
-        android:background="@color/cardview_light_background"
-        android:ems="10"
-        android:hint=" Search for an item."
+        android:layout_marginBottom="16dp"
+        android:background="@android:color/transparent"
+        android:ems="15"
         android:inputType="textAutoComplete"
         android:selectAllOnFocus="true"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline1"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline2" />
 
     <ImageButton
-        android:id="@+id/searchBtn"
-        android:layout_width="0dp"
+        android:id="@+id/search_button"
+        android:layout_width="20dp"
         android:layout_height="41dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="8dp"
         android:background="@android:color/transparent"
-        android:tint="@drawable/bg_button"
+        android:src="@drawable/search"
         app:layout_constraintBottom_toTopOf="@+id/guideline1"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:srcCompat="@android:drawable/ic_menu_search" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline3" />
 
     <TextView
         android:id="@+id/popular"
@@ -59,6 +72,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:clickable="true"
+        android:fontFamily="@font/roboto_black"
         android:gravity="center"
         android:text=" Most Popular"
         android:textSize="12sp"
@@ -75,6 +89,7 @@
         android:layout_marginEnd="8dp"
         android:clickable="true"
         android:gravity="center"
+        android:fontFamily="@font/roboto_black"
         android:text=" Recommended"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
@@ -89,12 +104,15 @@
         android:layout_marginEnd="8dp"
         android:clickable="true"
         android:gravity="center"
+        android:fontFamily="@font/roboto_black"
         android:text=" Nearby"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline14"
         app:layout_constraintStart_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toTopOf="@+id/guideline1" />
+
+
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -111,7 +129,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="20dp"
-        app:layout_constraintGuide_percent="0.60" />
+        app:layout_constraintGuide_percent="0.64" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
@@ -134,8 +152,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp"
-        app:layout_constraintGuide_percent="0.20" />
+        app:layout_constraintGuide_begin="128dp"
+        app:layout_constraintGuide_percent="0.17" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -150,15 +168,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="20dp"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.28" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp"
-        app:layout_constraintGuide_percent="0.79" />
+        app:layout_constraintGuide_begin="338dp"
+        app:layout_constraintGuide_percent="0.97" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -168,20 +186,19 @@
         app:layout_constraintGuide_begin="20dp"
         app:layout_constraintGuide_percent="0.03" />
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="vertical"
-        android:paddingLeft="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline13"
-        app:layout_constraintVertical_bias="0.0"></LinearLayout>
 
+    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/gridview"
+        app:layout_constraintTop_toTopOf="@+id/guideline13"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="400dp"
+        android:layout_height="520dp"
+        android:columnWidth="175dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

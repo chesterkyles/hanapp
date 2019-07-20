@@ -1,38 +1,46 @@
 package com.hanapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
+import android.widget.ImageView;
+
+import android.app.Activity;
+
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
+
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
-    private Button cam_button;
-    private ImageButton search_button;
+    private ImageButton cam_button;
 
     //Navigation Pane
     private TextView email_ad_str;
     private TextView username_str;
     private TextView reward_pt;
-    private Button settings_btn;
-    private Button logout_btn;
+    private ImageButton settings_btn;
+    private ImageButton logout_btn;
+
+    private GridView gridview;
 
     String login = null;
 
@@ -41,21 +49,12 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.account_info);
 
-        cam_button = (Button) findViewById(R.id.camera_button);
+        cam_button = (ImageButton) findViewById(R.id.camera_button);
+
         cam_button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 Intent cam_page_intent = new Intent(HomeActivity.this, CameraActivity.class);
                 startActivity(cam_page_intent);
-                finish();
-            }
-        });
-
-        search_button = (ImageButton) findViewById(R.id.searchBtn);
-        search_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent map_intent = new Intent(HomeActivity.this, Maps.class);
-                startActivity(map_intent);
                 finish();
             }
         });
@@ -66,15 +65,32 @@ public class HomeActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
+//        email_ad_str = (TextView) navigationView.findViewById(R.id.email_ad);
         username_str = (TextView) navigationView.findViewById(R.id.username);
         reward_pt = (TextView) navigationView.findViewById(R.id.reward_point);
-        //settings_btn = (Button) navigationView.findViewById(R.id.settings);
-        //logout_btn = (Button) navigationView.findViewById(R.id.logout);
+        settings_btn = (ImageButton) navigationView.findViewById(R.id.settings);
+        logout_btn = (ImageButton) navigationView.findViewById(R.id.logout);
+
+        ArrayList<Item> itemsArrayList = generateItemsList();
+
+        gridview = (GridView) findViewById(R.id.gridview);
+        gridview.setAdapter(new CustomListAdapter(this, itemsArrayList));
+
+        gridview.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent,
+                                    View v, int position, long id){
+                // Send intent to SingleViewActivity
+                Intent i = new Intent(getApplicationContext(), ProductPageActivity.class);
+                // Pass image index
+                i.putExtra("id", position);
+                startActivity(i);
+            }
+        });
 
         Bundle data = getIntent().getExtras();
         if (data != null) {
             login = data.getString(LoginActivity.LoginObject);
-            //email_ad_str.setText(login);
+            email_ad_str.setText(login);
 
             String path = "/sdcard/CSV_Files/";
             String fileName = "user.csv";
@@ -92,7 +108,20 @@ public class HomeActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+    }
 
+    private ArrayList<Item> generateItemsList() {
+        ArrayList<Item> array;
+        array = new ArrayList<Item>();
+
+        int i = 0;
+
+        for (i = 0; i < 10; i++){
+            Item item_holder = new Item("Test".concat(Integer.toString(i)), "Tested".concat(Integer.toString(i)));
+            array.add(item_holder);
+        }
+
+        return array;
     }
 
     @Override
