@@ -100,7 +100,7 @@
             android:layout_marginEnd="10dp"
             android:gravity="center"
             android:horizontalSpacing="10dp"
-            android:numColumns="2"
+            android:numColumns="1"
             android:stretchMode="columnWidth"
             android:verticalSpacing="10dp" />
 

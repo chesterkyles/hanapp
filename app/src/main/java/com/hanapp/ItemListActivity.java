@@ -55,7 +55,7 @@ public class ItemListActivity extends AppCompatActivity
         ArrayList<Item> itemsArrayList = generateItemsList();
 
         gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setAdapter(new CustomListAdapter(this, itemsArrayList));
+        gridview.setAdapter(new CustomListAdapter_OneRow(this, itemsArrayList));
 
         promptDialog = new Dialog(this);
 
