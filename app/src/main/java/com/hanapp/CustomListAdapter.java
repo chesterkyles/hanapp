@@ -72,7 +72,7 @@ public class CustomListAdapter extends BaseAdapter {
         if (imageFile.exists()) {
             imgViewPicture.setImageBitmap(BitmapFactory.decodeFile(imageFile.getAbsolutePath()));
         }
-        
+
         // returns the view for the current row
         return convertView;
     }

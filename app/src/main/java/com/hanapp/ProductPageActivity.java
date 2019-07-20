@@ -20,14 +20,13 @@ public class ProductPageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_page);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         // Get intent data
         Intent i = getIntent();
 
         // Selected image id
         int position = i.getExtras().getInt("id");
+//        CustomListAdapter adapter = new CustomListAdapter(this, );
         //ImageAdapter imageAdapter = new ImageAdapter(this);
 
         ImageView imageView = (ImageView) findViewById(R.id.product_image);
