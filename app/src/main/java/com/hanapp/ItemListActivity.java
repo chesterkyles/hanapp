@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,14 +28,8 @@ import java.io.File;
 public class ItemListActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
-    private TextView barcodeValue;
-    private EditText itemName;
-    private EditText manufacturer;
-    private EditText itemPrice;
-    private EditText locationName;
-    private Button submitInfo;
-    private ImageView itemPicture;
     Dialog promptDialog;
+    ImageButton submitBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +50,14 @@ public class ItemListActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         promptDialog = new Dialog(this);
+
+        submitBtn = (ImageButton) findViewById(R.id.submit_items);
+        submitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPrompt(false);
+            }
+        });
 
         /*
         String path = "/sdcard/CSV_Files/" ;

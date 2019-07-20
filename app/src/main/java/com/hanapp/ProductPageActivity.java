@@ -26,6 +26,7 @@ public class ProductPageActivity extends AppCompatActivity {
 
         // Selected image id
         int position = i.getExtras().getInt("id");
+//        CustomListAdapter adapter = new CustomListAdapter(this, );
         //ImageAdapter imageAdapter = new ImageAdapter(this);
 
         ImageView imageView = (ImageView) findViewById(R.id.product_image);
