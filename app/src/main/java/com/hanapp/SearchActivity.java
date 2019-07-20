@@ -17,11 +17,8 @@ public class SearchActivity extends AppCompatActivity {
 
     Dialog promptDialog;
     ImageButton mapBtn;
-    EditText search_view;
-    String search_str;
 
-    String path = "/sdcard/CSV_Files/";
-    String fileName = "items_new.csv";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,15 +30,10 @@ public class SearchActivity extends AppCompatActivity {
         GridView gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new CustomListAdapter(this, itemsArrayList));
 
-        search_view = (EditText) findViewById(R.id.search_edit);
-
         mapBtn = (ImageButton) findViewById(R.id.map1);
         mapBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                search_str = search_view.getText().toString();
-                CsvFileInOut csv_file = new CsvFileInOut(path, fileName);
-                csv_file.search_item(search_str);
                 Intent map_intent = new Intent(SearchActivity.this, Maps.class);
                 startActivity(map_intent);
                 finish();
