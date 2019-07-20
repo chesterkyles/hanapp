@@ -108,38 +108,22 @@
 
     </ScrollView>
 
-    <ImageButton
-        android:id="@+id/list1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@android:color/transparent"
-        android:clickable="true"
-        android:contentDescription="TODO"
-        android:src="@drawable/list1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintBottom_toTopOf="@+id/guideline4"
-        app:layout_constraintEnd_toStartOf="@+id/guideline14"
-        app:layout_constraintStart_toStartOf="@+id/guideline6"
-        app:layout_constraintTop_toTopOf="@+id/guideline1" />
 
     <ImageButton
         android:id="@+id/map1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:background="@android:color/transparent"
         android:clickable="true"
         android:contentDescription="TODO"
-        android:src="@drawable/map1"
+        android:src="@drawable/world"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.64"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline14"
-        app:layout_constraintStart_toStartOf="@+id/list1"
         app:layout_constraintTop_toTopOf="@+id/guideline1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
