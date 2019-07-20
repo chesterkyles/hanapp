@@ -51,6 +51,7 @@ public class CameraActivity extends AppCompatActivity {
     private Switch flash_switch; // For Flash
     boolean autoFocus = true; // set always to true
     boolean useFlash = false;
+    Boolean is_preview = false;
 
     private CameraSource mCameraSource;
     private CameraSourcePreview mCameraPreview;
@@ -107,6 +108,8 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     private void takePicture(){
+
+        is_preview = true;
         try {
             mCameraSource.takePicture(null, new CameraSource.PictureCallback() {
 
@@ -231,7 +234,13 @@ public class CameraActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        showPrompt(true);
+        if (is_preview) {
+            showPrompt(true);
+        } else {
+            Intent input_to_home_intent = new Intent(CameraActivity.this, HomeActivity.class);
+            startActivity(input_to_home_intent);
+            finish();
+        }
     }
 
     public void showPrompt(Boolean prompt_exit) {
