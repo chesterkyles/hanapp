@@ -90,7 +90,6 @@ public class HomeActivity extends AppCompatActivity
         Bundle data = getIntent().getExtras();
         if (data != null) {
             login = data.getString(LoginActivity.LoginObject);
-//            email_ad_str.setText(login);
 
             String path = "/sdcard/CSV_Files/";
             String fileName = "user.csv";

@@ -1,9 +1,16 @@
 package com.hanapp;
 
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentActivity;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -15,6 +22,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class Maps extends FragmentActivity implements OnMapReadyCallback {
 
+    Dialog promptDialog;
     private GoogleMap mMap;
     String path = "/sdcard/CSV_Files/";
     String fileName = "read_locations.csv";
@@ -27,6 +35,8 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        promptDialog = new Dialog(this);
     }
 
 
@@ -59,5 +69,41 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
             mMap.addMarker(new MarkerOptions().position(loc_coordinate).title(loc_name).snippet(price)
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        showPrompt(true);
+    }
+
+    public void showPrompt(Boolean prompt_exit) {
+        ImageButton cancel;
+        ImageButton submit;
+        TextView prompt;
+
+        promptDialog.setContentView(R.layout.prompt);
+        prompt = (TextView) promptDialog.findViewById(R.id.prompt_text);
+        cancel = (ImageButton) promptDialog.findViewById(R.id.submit_no);
+        submit = (ImageButton) promptDialog.findViewById(R.id.submit_yes);
+
+        cancel.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                promptDialog.dismiss();
+            }
+        });
+
+        submit.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                promptDialog.dismiss();
+                Intent input_to_home_intent = new Intent(Maps.this,HomeActivity.class);
+                startActivity(input_to_home_intent);
+                finish();
+            }
+        });
+
+        if(prompt_exit) prompt.setText("Are you sure you want to exit?");
+        promptDialog.show();
     }
 }
