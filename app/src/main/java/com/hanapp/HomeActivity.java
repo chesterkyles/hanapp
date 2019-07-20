@@ -51,6 +51,14 @@ public class HomeActivity extends AppCompatActivity
         });
 
         search_button = (ImageButton) findViewById(R.id.searchBtn);
+        search_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent map_intent = new Intent(HomeActivity.this, Maps.class);
+                startActivity(map_intent);
+                finish();
+            }
+        });
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

@@ -22,6 +22,9 @@
         <activity android:name=".ProductPageActivity"></activity>
         <activity android:name=".ItemListActivity" />
 
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAMlzjwTjNCVikeQ_LpdKAu7s9EgI5AJQ0"/>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -44,6 +47,9 @@
             android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".HomeActivity"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".Maps"
             android:windowSoftInputMode="adjustNothing" />
     </application>
 
