@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class CsvFileInOut {
     String path;
     String fileName;
+    String database = "/sdcard/CSV_Files/items_new.csv";
 
     public CsvFileInOut(String path, String fileName){
         this.path = path;
@@ -185,4 +186,49 @@ public class CsvFileInOut {
         return null;
     }
 
+    public void to_database() {
+        try {
+            File file = new File(path + fileName);
+            FileInputStream fileInputStream = new FileInputStream (file);
+            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+            File file_db = new File(database);
+            FileOutputStream fileOutputStream_db = new FileOutputStream(file_db);
+            OutputStreamWriter outputStreamWriter_db = new OutputStreamWriter(fileOutputStream_db);
+            BufferedWriter bufferedWriter_db = new BufferedWriter (outputStreamWriter_db);
+
+            String csvLine;
+
+            ArrayList<String> barcode = new ArrayList<String>();
+            ArrayList<String> product_name = new ArrayList<String>();
+            ArrayList<String> company = new ArrayList<String>();
+            ArrayList<String> place_name = new ArrayList<String>();
+            ArrayList<String> price = new ArrayList<String>();
+            ArrayList<String> path = new ArrayList<String>();
+            ArrayList<String> location_latitude = new ArrayList<String>();
+            ArrayList<String> location_longitude = new ArrayList<String>();
+
+            int index_db=0;
+            while ((csvLine = bufferedReader.readLine()) != null) {
+                String[] row = csvLine.split(",");
+                barcode.add(row[0]);
+                product_name.add(row[1]);
+                company.add(row[2]);
+                place_name.add(row[3]);
+                price.add(row[4]);
+                path.add(row[5]);
+                location_latitude.add(row[6]);
+                location_longitude.add(row[7]);
+
+                bufferedWriter_db.write(csvLine);
+                index_db += 1;
+            }
+            bufferedWriter_db.flush();
+            bufferedWriter_db.close();
+        }
+        catch (IOException ex) {
+            throw new RuntimeException("Error in reading CSV file: "+ex);
+        }
+    }
 }
