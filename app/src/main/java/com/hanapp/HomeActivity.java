@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.view.ViewGroup;
@@ -45,6 +46,12 @@ public class HomeActivity extends AppCompatActivity
 
     String login = null;
 
+    String search_str;
+    String search_path = "/sdcard/CSV_Files/";
+    String search_fileName = "items_new.csv";
+
+    EditText search_view;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +59,8 @@ public class HomeActivity extends AppCompatActivity
 
         cam_button = (ImageButton) findViewById(R.id.camera_button);
         search_button = (ImageButton) findViewById(R.id.search_button);
-
+        search_view = (EditText) findViewById(R.id.search_edit);
+        
         cam_button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 Intent cam_page_intent = new Intent(HomeActivity.this, CameraActivity.class);
@@ -63,6 +71,9 @@ public class HomeActivity extends AppCompatActivity
 
         search_button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
+                search_str = search_view.getText().toString();
+                CsvFileInOut csv_file = new CsvFileInOut(search_path, search_fileName);
+                csv_file.search_item(search_str);
                 Intent maps_intent = new Intent(HomeActivity.this, SearchActivity.class);
                 startActivity(maps_intent);
                 finish();
