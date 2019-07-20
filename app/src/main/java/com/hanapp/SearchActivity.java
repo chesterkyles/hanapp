@@ -15,16 +15,28 @@ import java.util.ArrayList;
 public class SearchActivity extends AppCompatActivity {
 
     Dialog promptDialog;
+    ImageButton mapBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_search_list);
 
         ArrayList<Item> itemsArrayList = generateItemsList();
 
         GridView gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new CustomListAdapter(this, itemsArrayList));
+
+        mapBtn = (ImageButton) findViewById(R.id.map1);
+        mapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent map_intent = new Intent(SearchActivity.this, Maps.class);
+                startActivity(map_intent);
+                finish();
+            }
+        });
+
     }
 
     private ArrayList<Item> generateItemsList() {

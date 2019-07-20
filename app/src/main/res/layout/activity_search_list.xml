@@ -183,5 +183,5 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline14"
         app:layout_constraintStart_toStartOf="@+id/list1"
         app:layout_constraintTop_toTopOf="@+id/guideline1" />
-</
+
 </androidx.constraintlayout.widget.ConstraintLayout>
