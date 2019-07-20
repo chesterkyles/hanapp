@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,12 +25,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class ItemListActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
     Dialog promptDialog;
     ImageButton submitBtn;
+    private GridView gridview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,11 @@ public class ItemListActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        ArrayList<Item> itemsArrayList = generateItemsList();
+
+        gridview = (GridView) findViewById(R.id.gridview);
+        gridview.setAdapter(new CustomListAdapter(this, itemsArrayList));
 
         promptDialog = new Dialog(this);
 
@@ -126,6 +134,32 @@ public class ItemListActivity extends AppCompatActivity
 
         if(prompt_exit) prompt.setText("Are you sure you want to exit?");
         promptDialog.show();
+    }
+
+    private ArrayList<Item> generateItemsList() {
+        ArrayList<Item> array;
+        array = new ArrayList<Item>();
+
+        String path = "/sdcard/CSV_Files/";
+        String fileName = "from_scan.csv";
+        String item_name;
+        String item_location;
+        String item_price;
+        String item_path;
+
+        CsvFileInOut items_csv = new CsvFileInOut(path, fileName);
+        int max_index = Integer.parseInt(items_csv.search("index").get(0));
+        for (int ind=0; ind<max_index; ind++){
+            item_name = items_csv.search("product").get(ind);
+            item_location = items_csv.search("place").get(ind);
+            item_price = items_csv.search("price").get(ind);
+            item_path = items_csv.search("path").get(ind);
+
+            Item item_holder = new Item(item_name, item_location, item_price, item_path);
+            array.add(item_holder);
+        }
+
+        return array;
     }
 }
 
