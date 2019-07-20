@@ -2,6 +2,7 @@ package com.hanapp;
 
 import android.content.Context;
 
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.hanapp.R;
 
+import java.io.File;
 import java.util.ArrayList;
 
 
@@ -59,12 +61,18 @@ public class CustomListAdapter extends BaseAdapter {
                 convertView.findViewById(R.id.text_view_item_location);
         TextView textViewItemPrice = (TextView)
                 convertView.findViewById(R.id.text_view_item_price);
-
+        ImageView imgViewPicture = (ImageView)
+                convertView.findViewById(R.id.img_view_picture);
         //sets the text for item name and item description from the current item object
         textViewItemName.setText(currentItem.getItemName());
         textViewItemLocation.setText(currentItem.getItemLocation());
         textViewItemPrice.setText(currentItem.getItemPrice());
 
+        File imageFile = new File(currentItem.getItemPath());
+        if (imageFile.exists()) {
+            imgViewPicture.setImageBitmap(BitmapFactory.decodeFile(imageFile.getAbsolutePath()));
+        }
+        
         // returns the view for the current row
         return convertView;
     }

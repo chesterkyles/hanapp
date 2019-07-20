@@ -118,6 +118,7 @@ public class HomeActivity extends AppCompatActivity
         String item_name;
         String item_location;
         String item_price;
+        String item_path;
 
         CsvFileInOut items_csv = new CsvFileInOut(path, fileName);
         int max_index = Integer.parseInt(items_csv.search("index").get(0));
@@ -125,8 +126,9 @@ public class HomeActivity extends AppCompatActivity
             item_name = items_csv.search("product").get(ind);
             item_location = items_csv.search("place").get(ind);
             item_price = items_csv.search("price").get(ind);
+            item_path = items_csv.search("path").get(ind);
 
-            Item item_holder = new Item(item_name, item_location, item_price);
+            Item item_holder = new Item(item_name, item_location, item_price, item_path);
             array.add(item_holder);
         }
 
