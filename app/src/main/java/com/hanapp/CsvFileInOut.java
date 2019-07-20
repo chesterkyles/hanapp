@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CsvFileInOut {
     String path;
@@ -187,7 +189,7 @@ public class CsvFileInOut {
         }
         return null;
     }
-    public void search_item(String search_this) {
+    public void search_item(Pattern search_this) {
         try {
             File file = new File(path + fileName);
             FileInputStream fileInputStream = new FileInputStream (file);
@@ -201,6 +203,7 @@ public class CsvFileInOut {
 
             String csvLine;
             String printToSearchFile;
+            Matcher matcher;
 
             ArrayList<String> barcode = new ArrayList<String>();
             ArrayList<String> product_name = new ArrayList<String>();
@@ -229,8 +232,11 @@ public class CsvFileInOut {
             }
             file_s.createNewFile();
 
+            search_this = Pattern.compile("'(.*?)'");
+
             for (int ind=0; ind<index; ind++){
-                if(product_name.get(ind).equals(search_this)) {
+                matcher = search_this.matcher(product_name.get(ind));
+                if(matcher.find()) {
                     printToSearchFile = location_latitude.get(ind) + "," + location_longitude.get(ind) + "," + product_name.get(ind) + "," + price.get(ind);
                     bufferedWriter_s.write(printToSearchFile);
                 }
