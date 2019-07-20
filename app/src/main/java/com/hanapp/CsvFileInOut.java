@@ -189,7 +189,7 @@ public class CsvFileInOut {
         }
         return null;
     }
-    public void search_item(Pattern search_this) {
+    public void search_item(String search_this) {
         try {
             File file = new File(path + fileName);
             FileInputStream fileInputStream = new FileInputStream (file);
@@ -232,10 +232,10 @@ public class CsvFileInOut {
             }
             file_s.createNewFile();
 
-            search_this = Pattern.compile("'(.*?)'");
+            Pattern pattern = Pattern.compile("(,*?)");
 
             for (int ind=0; ind<index; ind++){
-                matcher = search_this.matcher(product_name.get(ind));
+                matcher = pattern.matcher(product_name.get(ind));
                 if(matcher.find()) {
                     printToSearchFile = location_latitude.get(ind) + "," + location_longitude.get(ind) + "," + product_name.get(ind) + "," + price.get(ind);
                     bufferedWriter_s.write(printToSearchFile);
