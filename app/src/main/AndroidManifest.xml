@@ -32,31 +32,35 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode" />
 
-        <activity android:name=".LoginActivity" />
-
-
-        <activity
-            android:name=".CameraActivity"
-            android:windowSoftInputMode="adjustNothing" />
-        <activity
-            android:name=".SearchActivity"
-            android:windowSoftInputMode="adjustNothing" />
-        <activity
-            android:name=".HomeActivity"
-            android:windowSoftInputMode="adjustNothing" >
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".CameraActivity"
+            android:windowSoftInputMode="adjustNothing" />
+
+        <activity
+            android:name=".SearchActivity"
+            android:windowSoftInputMode="adjustNothing" />
+
+        <activity
+            android:name=".HomeActivity"
+            android:windowSoftInputMode="adjustNothing" />
+
         <activity
             android:name=".Maps"
             android:windowSoftInputMode="adjustNothing" />
+
     </application>
 
 </manifest>
