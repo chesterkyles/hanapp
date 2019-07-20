@@ -225,9 +225,9 @@ public class CsvFileInOut {
                 index += 1;
             }
             if (file_s.exists()) {
-                file.delete();
+                file_s.delete();
             }
-            file.createNewFile();
+            file_s.createNewFile();
 
             for (int ind=0; ind<index; ind++){
                 if(product_name.get(ind).equals(search_this)) {
