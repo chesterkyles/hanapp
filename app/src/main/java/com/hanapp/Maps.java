@@ -22,7 +22,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class Maps extends FragmentActivity implements OnMapReadyCallback {
 
-    Dialog promptDialog;
     private GoogleMap mMap;
     String path = "/sdcard/CSV_Files/";
     String fileName = "read_locations.csv";
@@ -35,8 +34,6 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-        promptDialog = new Dialog(this);
     }
 
 
@@ -73,37 +70,8 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
 
     @Override
     public void onBackPressed() {
-        showPrompt(true);
-    }
-
-    public void showPrompt(Boolean prompt_exit) {
-        ImageButton cancel;
-        ImageButton submit;
-        TextView prompt;
-
-        promptDialog.setContentView(R.layout.prompt);
-        prompt = (TextView) promptDialog.findViewById(R.id.prompt_text);
-        cancel = (ImageButton) promptDialog.findViewById(R.id.submit_no);
-        submit = (ImageButton) promptDialog.findViewById(R.id.submit_yes);
-
-        cancel.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                promptDialog.dismiss();
-            }
-        });
-
-        submit.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                promptDialog.dismiss();
-                Intent input_to_home_intent = new Intent(Maps.this,HomeActivity.class);
-                startActivity(input_to_home_intent);
-                finish();
-            }
-        });
-
-        if(prompt_exit) prompt.setText("Are you sure you want to exit?");
-        promptDialog.show();
+        Intent input_to_home_intent = new Intent(SearchActivity.this,HomeActivity.class);
+        startActivity(input_to_home_intent);
+        finish();
     }
 }
