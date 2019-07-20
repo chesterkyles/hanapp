@@ -14,6 +14,8 @@ public class CsvFileInOut {
     String path;
     String fileName;
     String database = "/sdcard/CSV_Files/items_new.csv";
+    String loc_database = "/sdcard/CSV_Files/loc_database.csv";
+    String search = "/sdcard/CSV_Files/search_result.csv";
 
     public CsvFileInOut(String path, String fileName){
         this.path = path;
@@ -185,7 +187,62 @@ public class CsvFileInOut {
         }
         return null;
     }
+    public void search_item(String search_this) {
+        try {
+            File file = new File(path + fileName);
+            FileInputStream fileInputStream = new FileInputStream (file);
+            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
+            File file_s = new File(search);
+            FileOutputStream fileOutputStream_s = new FileOutputStream(file_s);
+            OutputStreamWriter outputStreamWriter_s = new OutputStreamWriter(fileOutputStream_s);
+            BufferedWriter bufferedWriter_s = new BufferedWriter (outputStreamWriter_s);
+
+            String csvLine;
+            String printToSearchFile;
+
+            ArrayList<String> barcode = new ArrayList<String>();
+            ArrayList<String> product_name = new ArrayList<String>();
+            ArrayList<String> company = new ArrayList<String>();
+            ArrayList<String> place_name = new ArrayList<String>();
+            ArrayList<String> price = new ArrayList<String>();
+            ArrayList<String> path = new ArrayList<String>();
+            ArrayList<String> location_latitude = new ArrayList<String>();
+            ArrayList<String> location_longitude = new ArrayList<String>();
+
+            int index=0;
+            while ((csvLine = bufferedReader.readLine()) != null) {
+                String[] row = csvLine.split(",");
+                barcode.add(row[0]);
+                product_name.add(row[1]);
+                company.add(row[2]);
+                place_name.add(row[3]);
+                price.add(row[4]);
+                path.add(row[5]);
+                location_latitude.add(row[6]);
+                location_longitude.add(row[7]);
+                index += 1;
+            }
+            if (file_s.exists()) {
+                file.delete();
+            }
+            file.createNewFile();
+
+            for (int ind=0; ind<index; ind++){
+                if(product_name.get(ind).equals(search_this)) {
+                    printToSearchFile = barcode.get(ind) + "," + product_name.get(ind) + "," + company.get(ind) + "," + place_name.get(ind) + "," + price.get(ind) + "," + path.get(ind) + "," + location_latitude.get(ind) + "," + location_longitude.get(ind) + ",";
+                    bufferedWriter_s.write(printToSearchFile);
+                }
+            }
+            bufferedWriter_s.flush();
+            bufferedWriter_s.close();
+
+        }
+        catch (IOException ex) {
+            throw new RuntimeException("Error in reading CSV file: "+ex);
+        }
+    }
     public void to_database() {
         try {
             File file = new File(path + fileName);
