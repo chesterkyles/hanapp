@@ -19,8 +19,12 @@
         android:roundIcon="@drawable/hanapp_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".ProductPageActivity"></activity>
-        <activity android:name=".ItemListActivity" />
+        <activity 
+            android:name=".ProductPageActivity"
+            android:windowSoftInputMode="adjustNothing"></activity>
+        <activity
+            android:name=".ItemListActivity"
+            android:windowSoftInputMode="adjustNothing"/>
 
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAMlzjwTjNCVikeQ_LpdKAu7s9EgI5AJQ0"/>
