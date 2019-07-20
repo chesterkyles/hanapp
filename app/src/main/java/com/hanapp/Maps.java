@@ -70,7 +70,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
 
     @Override
     public void onBackPressed() {
-        Intent input_to_home_intent = new Intent(Maps.this,HomeActivity.class);
+        Intent input_to_home_intent = new Intent(Maps.this,SearchActivity.class);
         startActivity(input_to_home_intent);
         finish();
     }
