@@ -99,22 +99,22 @@ public class HomeActivity extends AppCompatActivity
         gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new CustomListAdapter(this, itemsArrayList));
 
-        gridview.setOnItemClickListener(new OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent,
-                                    View v, int position, long id){
-                // Send intent to SingleViewActivity
-                Intent i = new Intent(getApplicationContext(), ProductPageActivity.class);
-                // Pass image index
-                i.putExtra("id", position);
-
-//                Bundle extras = new Bundle();
-//                extras.putString("EXTRA_USERNAME","my_username");
-//                extras.putString("EXTRA_PASSWORD","my_password");
-//                i.putExtras(extras);
-
-                startActivity(i);
-            }
-        });
+//        gridview.setOnItemClickListener(new OnItemClickListener() {
+//            public void onItemClick(AdapterView<?> parent,
+//                                    View v, int position, long id){
+//                // Send intent to SingleViewActivity
+//                Intent i = new Intent(getApplicationContext(), ProductPageActivity.class);
+//                // Pass image index
+//                i.putExtra("id", position);
+//
+////                Bundle extras = new Bundle();
+////                extras.putString("EXTRA_USERNAME","my_username");
+////                extras.putString("EXTRA_PASSWORD","my_password");
+////                i.putExtras(extras);
+//
+//                startActivity(i);
+//            }
+//        });
 
         Bundle data = getIntent().getExtras();
         if (data != null) {
