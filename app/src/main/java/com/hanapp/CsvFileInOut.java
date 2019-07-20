@@ -149,10 +149,10 @@ public class CsvFileInOut {
                 product_name.add(row[1]);
                 company.add(row[2]);
                 place_name.add(row[3]);
-                price.add(row[3]);
-                path.add(row[3]);
-                location_latitude.add(row[3]);
-                location_longitude.add(row[3]);
+                price.add(row[4]);
+                path.add(row[5]);
+                location_latitude.add(row[6]);
+                location_longitude.add(row[7]);
                 index += 1;
             }
             ArrayList<String> index_str = new ArrayList<>();
