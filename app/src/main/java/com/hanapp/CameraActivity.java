@@ -56,8 +56,8 @@ public class CameraActivity extends AppCompatActivity {
     private CameraSourcePreview mCameraPreview;
     private GraphicOverlay<OcrGraphic> mGraphicOverlay;
 
-    private Button captureBtn;
-    private Button sendBtn;
+    private ImageButton captureBtn;
+    private ImageButton sendBtn;
     Dialog promptDialog;
 
     Bitmap bitmap = null;
@@ -95,7 +95,7 @@ public class CameraActivity extends AppCompatActivity {
             requestCameraPermission();
         }
 
-        captureBtn = (Button) findViewById(R.id.capture_button);
+        captureBtn = (ImageButton) findViewById(R.id.capture_button);
         captureBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,30 +112,28 @@ public class CameraActivity extends AppCompatActivity {
 
                 @Override
                 public void onPictureTaken(byte[] bytes) {
-                    try {
-                        mCameraPreview.stop();
+                try {
+                    mCameraSource.release();
 
-                        bitmap = BitmapFactory.decodeByteArray(bytes ,0, bytes.length);
+                    bitmap = BitmapFactory.decodeByteArray(bytes ,0, bytes.length);
 
-                        captureBtn.setVisibility(View.GONE);
-                        sendBtn = (Button) findViewById(R.id.send_image);
-                        sendBtn.setVisibility(View.VISIBLE);
+                    captureBtn.setVisibility(View.GONE);
+                    sendBtn = (ImageButton) findViewById(R.id.send_image);
+                    sendBtn.setVisibility(View.VISIBLE);
 
-                        sendBtn.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
+                    sendBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent data = new Intent(CameraActivity.this, ItemListActivity.class);
+                            //data.putExtra(OCRObject, bitmap);
+                            startActivity(data);
+                            finish();
+                        }
+                    });
 
-                                Intent data = new Intent(CameraActivity.this, ItemListActivity.class);
-                                //data.putExtra(OCRObject, bitmap);
-                                startActivity(data);
-                                finish();
-                            }
-                        });
-
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 }
 
             });

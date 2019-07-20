@@ -57,29 +57,13 @@ public class ItemListActivity extends AppCompatActivity
 
         /*
         String path = "/sdcard/CSV_Files/" ;
-        String fileName = "items.csv";
+        String fileName = "itemlist.csv";
         CsvFileInOut csvFile = new CsvFileInOut(path,fileName);
         String[] string_value = csvFile.read(null);
 
         if (string_value != null) {
-            itemName.setText(string_value[1]);
-            manufacturer.setText(string_value[2]);
-            itemPrice.setHint(string_value[3]);
-            itemPrice.requestFocus();
 
-            File imageFile = new File(string_value[4]);
-            if (imageFile.exists()) {
-                itemPicture.setImageBitmap(BitmapFactory.decodeFile(imageFile.getAbsolutePath()));
-            }
-        }
-
-        promptDialog = new Dialog(this);
-        submitInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //showPrompt(false);
-            }
-        });*/
+        }*/
     }
 
     @Override
@@ -90,7 +74,6 @@ public class ItemListActivity extends AppCompatActivity
         } else {
             showPrompt(true);
         }
-
     }
 
     @Override
