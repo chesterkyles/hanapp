@@ -27,6 +27,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity
@@ -56,6 +58,14 @@ public class HomeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.account_info);
+
+        File clear_this = new File ("/sdcard/CSV_Files/search_result.csv");
+        clear_this.delete();
+        try {
+            clear_this.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         cam_button = (ImageButton) findViewById(R.id.camera_button);
         search_button = (ImageButton) findViewById(R.id.search_button);

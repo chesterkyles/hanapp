@@ -5,12 +5,16 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static org.apache.commons.lang3.StringUtils.contains;
+import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
 
 public class CsvFileInOut {
     String path;
@@ -102,10 +106,10 @@ public class CsvFileInOut {
             int index=0;
             while ((csvLine = bufferedReader.readLine()) != null) {
                 String[] row = csvLine.split(",");
-                latitude.add(row[0]);
-                longitude.add(row[1]);
-                loc_name.add(row[2]);
-                price.add(row[3]);
+                latitude.add(row[6]);
+                longitude.add(row[7]);
+                loc_name.add(row[3]);
+                price.add(row[4]);
                 index += 1;
             }
             ArrayList<String> index_str = new ArrayList<>();
@@ -197,9 +201,10 @@ public class CsvFileInOut {
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
             File file_s = new File(search);
-            FileOutputStream fileOutputStream_s = new FileOutputStream(file_s);
-            OutputStreamWriter outputStreamWriter_s = new OutputStreamWriter(fileOutputStream_s);
-            BufferedWriter bufferedWriter_s = new BufferedWriter (outputStreamWriter_s);
+//            FileOutputStream fileOutputStream_s = new FileOutputStream(file_s);
+//            OutputStreamWriter outputStreamWriter_s = new OutputStreamWriter(fileOutputStream_s);
+//            BufferedWriter bufferedWriter_s = new BufferedWriter (outputStreamWriter_s);
+            FileWriter file_s_write = new FileWriter(file_s, true);
 
             String csvLine;
             String printToSearchFile;
@@ -227,22 +232,16 @@ public class CsvFileInOut {
                 location_longitude.add(row[7]);
                 index += 1;
             }
-            if (file_s.exists()) {
-                file_s.delete();
-            }
-            file_s.createNewFile();
-
-            Pattern pattern = Pattern.compile("(,*?)");
 
             for (int ind=0; ind<index; ind++){
-                matcher = pattern.matcher(product_name.get(ind));
-                if(matcher.find()) {
-                    printToSearchFile = location_latitude.get(ind) + "," + location_longitude.get(ind) + "," + product_name.get(ind) + "," + price.get(ind);
-                    bufferedWriter_s.write(printToSearchFile);
+                printToSearchFile = barcode.get(ind) + "," + product_name.get(ind) + "," + company.get(ind) + "," + place_name.get(ind) + "," + price.get(ind) + "," + path.get(ind) + "," + location_latitude.get(ind) + "," + location_longitude.get(ind)+"\n";
+                if(contains(product_name.get(ind).toLowerCase(),search_this.toLowerCase())) {
+//                    bufferedWriter_s.write(printToSearchFile);
+                    file_s_write.write(printToSearchFile);
                 }
             }
-            bufferedWriter_s.flush();
-            bufferedWriter_s.close();
+            file_s_write.flush();
+            file_s_write.close();
 
         }
         catch (IOException ex) {
@@ -293,5 +292,5 @@ public class CsvFileInOut {
         catch (IOException ex) {
             throw new RuntimeException("Error in reading CSV file: "+ex);
         }
-    }
+   }
 }

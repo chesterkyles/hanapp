@@ -14,6 +14,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class LoginActivity extends AppCompatActivity {
 
     public static final String LoginObject = "Login";
@@ -129,9 +133,16 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     String path = "/sdcard/CSV_Files/";
                     String fileName = "user.csv";
-                    CsvFileInOut csvFile = new CsvFileInOut(path, fileName);
-                    input_id = "\n" + email_str + "," + pass_str + "," + user_str + "," + "0.00," ;
-                    csvFile.write(input_id);
+                    File file = new File (path+fileName);
+                    try {
+                        FileWriter fileWriter = new FileWriter(file, true);
+                        input_id = email_str + "," + pass_str + "," + user_str + "," + "0.00,";
+                        fileWriter.write(input_id);
+                        fileWriter.flush();
+                        fileWriter.close();
+                    } catch (IOException ex){
+
+                    }
                 }
                 signup_dialog.dismiss();
             }
