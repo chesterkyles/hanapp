@@ -22,6 +22,13 @@ import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.text.TextBlock;
 import com.hanapp.CsvFileInOut;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+
 /**
  * A very simple Processor which gets detected TextBlocks and adds them to the overlay
  * as OcrGraphics.
@@ -46,24 +53,28 @@ public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
         graphicOverlay.clear();
         SparseArray<TextBlock> items = detections.getDetectedItems();
         String path = "/sdcard/CSV_Files/";
-        String fileName = "itemlist.csv";
+        String fileName = "ocr.csv";
         CsvFileInOut csvFile = new CsvFileInOut(path, fileName);
-        /*
-        String path = "/sdcard/CSV_Files/";
-                    String fileName = "user.csv";
 
-                    input_id = "\n" + email_str + "," + pass_str + "," + user_str + "," + "0.00," ;
-                    csvFile.write(input_id);
-        * */
-        //input everything to csv
-        for (int i = 0; i < items.size(); ++i) {
-            TextBlock item = items.valueAt(i);
-            if (item != null && item.getValue() != null) {
-                csvFile.write(item.getValue() + "\n");
-                Log.d("OcrDetectorProcessor", "Text detected! " + item.getValue());
-                OcrGraphic graphic = new OcrGraphic(graphicOverlay, item);
-                graphicOverlay.add(graphic);
+        try {
+            File file = new File(path + fileName);
+            FileWriter fileWriter = new FileWriter(file, true);
+            //input everything to csv
+            for (int i = 0; i < items.size(); ++i) {
+                TextBlock item = items.valueAt(i);
+                if (item != null && item.getValue() != null) {
+                    fileWriter.write("\n" + item.getValue());
+                    Log.d("OcrDetectorProcessor", "Text detected! " + item.getValue());
+                    OcrGraphic graphic = new OcrGraphic(graphicOverlay, item);
+                    graphicOverlay.add(graphic);
+                }
             }
+            fileWriter.flush();
+            fileWriter.close();
+
+        } catch (IOException ex) {
+            throw new RuntimeException("Error in writing to CSV file: "+ex);
+
         }
     }
 

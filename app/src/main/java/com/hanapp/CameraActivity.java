@@ -39,6 +39,7 @@ import com.hanapp.ocr.GraphicOverlay;
 import com.hanapp.ocr.OcrDetectorProcessor;
 import com.hanapp.ocr.OcrGraphic;
 
+import java.io.File;
 import java.io.IOException;
 
 public class CameraActivity extends AppCompatActivity {
@@ -234,6 +235,12 @@ public class CameraActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
+        String path = "/sdcard/CSV_Files/";
+        String fileName = "ocr.csv";
+        File file = new File (path+fileName);
+        if (file.exists()) {
+            file.delete();
+        }
         if (is_preview) {
             showPrompt(true);
         } else {
