@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -176,9 +177,9 @@ public class ItemListActivity extends AppCompatActivity
             while ((csvLine = bufferedReader.readLine()) != null) {
                 Log.d("CSV", csvLine);
                 if(csvLine.matches("\\d+(?:\\.\\d+)?")){
-                    price.add(Double.valueOf(csvLine));
-                    index += 1;
-                    Log.d("NUMBER!", csvLine);
+                        price.add(Double.valueOf(csvLine));
+                        index += 1;
+                        Log.d("NUMBER!", csvLine);
                 }
                 else {
                     if (contains(csvLine.toLowerCase(), "total")) {
@@ -195,12 +196,18 @@ public class ItemListActivity extends AppCompatActivity
                         continue;
                     }
                     else {
-                        name.add(csvLine);
-                        Log.d("TEXT!", csvLine);
+                            name.add(csvLine);
+                            Log.d("TEXT!", csvLine);
                     }
 
                 }
             }
+
+//            ArrayList<String> values=new ArrayList<String>();
+//            HashSet<String> hashSet = new HashSet<String>();
+//            hashSet.addAll(values);
+//            values.clear();
+//            values.addAll(hashSet);
 
             int i = 0;
             double total = 0;
