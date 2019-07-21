@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,8 +25,17 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static org.apache.commons.lang3.StringUtils.contains;
 
 public class ItemListActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
@@ -38,6 +48,8 @@ public class ItemListActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.item_list);
+
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -141,23 +153,83 @@ public class ItemListActivity extends AppCompatActivity
         array = new ArrayList<Item>();
 
         String path = "/sdcard/CSV_Files/";
-        String fileName = "from_scan.csv";
+        String fileName = "ocr.csv";
         String item_name;
         String item_location;
         String item_price;
         String item_path;
+        int num_entries = 0;
 
         CsvFileInOut items_csv = new CsvFileInOut(path, fileName);
-        int max_index = Integer.parseInt(items_csv.search("index").get(0));
-        for (int ind=0; ind<max_index; ind++){
-            item_name = items_csv.search("product").get(ind);
-            item_location = items_csv.search("place").get(ind);
-            item_price = items_csv.search("price").get(ind);
-            item_path = items_csv.search("path").get(ind);
 
-            Item item_holder = new Item(item_name, item_location, item_price, item_path);
-            array.add(item_holder);
+        try {
+            File file = new File(path + fileName);
+            FileInputStream fileInputStream = new FileInputStream (file);
+            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String csvLine;
+
+            ArrayList<String> name = new ArrayList<String>();
+            ArrayList<Double> price = new ArrayList<Double>();
+
+            int index=0;
+            while ((csvLine = bufferedReader.readLine()) != null) {
+                Log.d("CSV", csvLine);
+                if(csvLine.matches("\\d+(?:\\.\\d+)?")){
+                    price.add(Double.valueOf(csvLine));
+                    index += 1;
+                    Log.d("NUMBER!", csvLine);
+                }
+                else {
+                    if (contains(csvLine.toLowerCase(), "total")) {
+                        continue;
+                    } else if (contains(csvLine.toLowerCase(), "change")) {
+                        continue;
+                    } else if (contains(csvLine.toLowerCase(), "due")) {
+                        continue;
+                    } else if (contains(csvLine.toLowerCase(), "member")) {
+                        continue;
+                    } else if (contains(csvLine.toLowerCase(), "card")) {
+                        continue;
+                    } else if (contains(csvLine.toLowerCase(), "cash")){
+                        continue;
+                    }
+                    else {
+                        name.add(csvLine);
+                        Log.d("TEXT!", csvLine);
+                    }
+
+                }
+            }
+
+            int i = 0;
+            double total = 0;
+            while ((i < index) && (price.get(i) != total)) {
+                total = total + price.get(i);
+                i++;
+            }
+
+            num_entries = i-1;
+
+            for (int ind=0; ind<num_entries; ind++){
+                item_name = name.get(ind);
+                item_location = "Robinson's Manila";
+                item_price = Double.toString(price.get(ind));
+                item_path = "/sdcard/ImageAndroid/Tomi_Super_Sweet_Corn.jpg";
+
+                Item item_holder = new Item(item_name, item_location, item_price, item_path);
+                array.add(item_holder);
+            }
+
+
+
         }
+        catch (IOException ex) {
+            throw new RuntimeException("Error in reading CSV file: "+ex);
+        }
+
+
+
 
         return array;
     }

@@ -57,14 +57,11 @@ public class CustomListAdapter_OneRow extends BaseAdapter {
         // get the TextView for item name and item description
         TextView textViewItemName = (TextView)
                 convertView.findViewById(R.id.text_view_item_name);
-        TextView textViewItemLocation = (TextView)
-                convertView.findViewById(R.id.text_view_item_location);
         TextView textViewItemPrice = (TextView)
                 convertView.findViewById(R.id.text_view_item_price);
 
         //sets the text for item name and item description from the current item object
         textViewItemName.setText(currentItem.getItemName());
-        textViewItemLocation.setText(currentItem.getItemLocation());
         textViewItemPrice.setText(currentItem.getItemPrice());
 
         // returns the view for the current row
