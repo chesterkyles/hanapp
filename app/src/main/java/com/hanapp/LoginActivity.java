@@ -136,7 +136,7 @@ public class LoginActivity extends AppCompatActivity {
                     File file = new File (path+fileName);
                     try {
                         FileWriter fileWriter = new FileWriter(file, true);
-                        input_id = email_str + "," + pass_str + "," + user_str + "," + "0.00,";
+                        input_id = "\n" + email_str + "," + pass_str + "," + user_str + "," + "0.00,";
                         fileWriter.write(input_id);
                         fileWriter.flush();
                         fileWriter.close();
